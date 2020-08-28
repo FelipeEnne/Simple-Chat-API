@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/FelipeEnne/Simple-Chat-API/issues"
   },
-  "homepage": "https://github.com/FelipeEnne/Simple-Chat-API#readme"
+  "homepage": "https://github.com/FelipeEnne/Simple-Chat-API#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
