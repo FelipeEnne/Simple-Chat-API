@@ -1,0 +1,19 @@
+{
+  "name": "simple-chat-api",
+  "version": "1.0.0",
+  "description": "Simple Chat with Socket",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FelipeEnne/Simple-Chat-API.git"
+  },
+  "author": "Felipe Enne",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FelipeEnne/Simple-Chat-API/issues"
+  },
+  "homepage": "https://github.com/FelipeEnne/Simple-Chat-API#readme"
+}
