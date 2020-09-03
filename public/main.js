@@ -55,6 +55,7 @@ textInput.addEventListener('keyup', (e) => {
     textInput.value = '';
 
     if (txt !== '') {
+      addMessage('msg', userName, txt);
       socket.emit('send-msg', txt);
     }
   }
