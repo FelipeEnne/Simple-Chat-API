@@ -22,10 +22,16 @@ function addMessage(type, user, msg) {
       ul.innerHTML += `<li class='m-status'>${msg}</li>`;
       break;
     case 'msg':
-      ul.innerHTML += `<li class='m-txt'><span>${user}</span> ${msg}</li>`;
+      if (userName === user) {
+        ul.innerHTML += `<li class='m-txt'><span class='me'>${user}</span> ${msg}</li>`;
+      } else {
+        ul.innerHTML += `<li class='m-txt'><span>${user}</span> ${msg}</li>`;
+      }
       break;
     default:
   }
+
+  ul.scrollTop = ul.scrollHeight;
 }
 
 function renderUserList() {
@@ -86,4 +92,22 @@ socket.on('list-update', (data) => {
 
 socket.on('show-msg', data => {
   addMessage('msg', data.userName, data.message);
+});
+
+socket.on('disconnect', () => {
+  addMessage('status', null, 'Você foi desconectado!');
+  userList = [];
+  renderUserList();
+});
+
+socket.on('reconnect_error', () => {
+  addMessage('status', null, 'Tentando reconectar...');
+});
+
+socket.on('reconnect', () => {
+  addMessage('status', null, 'Reconectado');
+
+  if (userName !== '') {
+    socket.emit('join-request', userName);
+  }
 });
