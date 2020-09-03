@@ -16,14 +16,13 @@ chatPage.style.display = 'none';
 
 function addMessage(type, user, msg) {
   const ul = document.querySelector('.chatList');
-  // console.log(ul);
 
   switch (type) {
     case 'status':
-      ul.innerHTML += `<li class='m-status'> ${msg} </li>`;
+      ul.innerHTML += `<li class='m-status'>${msg}</li>`;
       break;
     case 'msg':
-      ul.innerHtML += `<li class='m-txt'><span>${user}</span> ${msg} </li>`;
+      ul.innerHTML += `<li class='m-txt'><span>${user}</span> ${msg}</li>`;
       break;
     default:
   }
@@ -50,6 +49,17 @@ loginInput.addEventListener('keyup', (e) => {
   }
 });
 
+textInput.addEventListener('keyup', (e) => {
+  if (e.keyCode === 13) {
+    const txt = textInput.value.trim();
+    textInput.value = '';
+
+    if (txt !== '') {
+      socket.emit('send-msg', txt);
+    }
+  }
+});
+
 socket.on('user-ok', (list) => {
   loginPage.style.display = 'none';
   chatPage.style.display = 'flex';
@@ -71,4 +81,8 @@ socket.on('list-update', (data) => {
   }
   userList = data.list;
   renderUserList();
+});
+
+socket.on('show-msg', data => {
+  addMessage('msg', data.userName, data.message);
 });

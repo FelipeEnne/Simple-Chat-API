@@ -35,4 +35,14 @@ io.on('connect', (socket) => {
       list: connectedUsers,
     });
   });
+
+  socket.on('send-msg', (txt) => {
+    const obj = {
+      userName: socket.userName,
+      message: txt,
+    };
+
+    socket.emit('show-msg', obj);
+    socket.broadcast.emit('show-msg', obj);
+  });
 });
